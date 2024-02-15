@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Money App</string>
+    <string name="principle">Principle</string>
+    <string name="rate">Rate</string>
+    <string name="years">Years</string>
+    <string name="compound_periods">Compounding Periods</string>
+</resources>
