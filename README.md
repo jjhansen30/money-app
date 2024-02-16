@@ -4,6 +4,12 @@
 
 This app only can calculate compound interest. Eventually this will do more but right now this is my first attempt at learning Android development.
 
+Learning goals with this iteration
+
+* MVVM Architecture
+* Composables
+* Handling State
+
 ____
 
 # Cloning the repo
