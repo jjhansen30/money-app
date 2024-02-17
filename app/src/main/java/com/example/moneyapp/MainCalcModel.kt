@@ -1,6 +1,7 @@
 package com.example.moneyapp
 
 import android.annotation.SuppressLint
+import java.util.Locale
 import kotlin.math.pow
 
 data class MainCalcModel(
@@ -10,7 +11,7 @@ data class MainCalcModel(
     var numYears: Int,
     var contributingAmount: Double,
     var endBalance: Double
-){
+) {
     val strPrinciple = "Principle"
     val strRate = "Rate"
     val strCompoundPeriods = "Compound Periods"
@@ -32,16 +33,16 @@ class InterestCalcModel constructor(private val data: MainCalcModel) {
      *
      * @return The future value of the investment as a Float.
      */
-    @SuppressLint("DefaultLocale")
+
     fun calcEndBalance(): Double {
         val p = data.principle
         val n = data.compoundPeriodsPerYear
         val r = data.rate
         val t = data.numYears
-        val base = 1 + (r/n)
+        val base = 1 + (r / n)
         val exponent = n * t
         val result = p * base.pow(exponent)
-        val formatted = String.format("%.2f",result)
+        val formatted = String.format(Locale.US, "%.2f", result)
         val newResult = formatted.toDouble()
         data.endBalance = newResult
 
