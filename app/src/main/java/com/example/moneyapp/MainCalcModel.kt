@@ -1,6 +1,5 @@
 package com.example.moneyapp
 
-import android.annotation.SuppressLint
 import java.util.Locale
 import kotlin.math.pow
 
@@ -11,14 +10,7 @@ data class MainCalcModel(
     var numYears: Int,
     var contributingAmount: Double,
     var endBalance: Double
-) {
-    val strPrinciple = "Principle"
-    val strRate = "Rate"
-    val strCompoundPeriods = "Compound Periods"
-    val strYears = "Years"
-    val strContributing = "Contributing Amount"
-    val strEndBalance = "End Balance"
-}
+)
 
 /**
  * Calculates the future value of a lump sum investment based on compound interest.
