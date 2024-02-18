@@ -1,25 +1,38 @@
 package com.example.moneyapp
 
-import android.content.res.Resources
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.graphics.Color
-import androidx.core.content.ContextCompat.getString
 
+open class StateMachine {
+    val principle: MutableState<String> = mutableStateOf(STR_INIT_DOLLAR)
+    val rate: MutableState<String> = mutableStateOf(STR_ZERO)
+    val compoundPeriods: MutableState<String> = mutableStateOf(STR_ZERO)
+    val years: MutableState<String> = mutableStateOf(STR_ZERO)
+    val contributingAmount: MutableState<String> = mutableStateOf(STR_INIT_DOLLAR)
+    val endBalance: MutableState<String> = mutableStateOf(STR_INIT_DOLLAR)
+
+    companion object {
+        const val STR_ZERO = "0"
+        const val STR_INIT_DOLLAR = "0.00"
+        const val ZERO = 0
+        const val INIT_DOLLAR = 0.00
+        const val PREFIX = "$"
+        const val SUFFIX = "%"
+    }
+}
 
 class MainCalcViewModel : StateMachine() {
     private var dataBase: MainCalcModel = MainCalcModel(
-        principle = 0.00,
+        principle = INIT_DOLLAR,
         rate = 0f,
-        compoundPeriodsPerYear = 0,
-        numYears = 0,
-        contributingAmount = 0.00,
-        endBalance = 0.00
+        compoundPeriodsPerYear = ZERO,
+        numYears = ZERO,
+        contributingAmount = INIT_DOLLAR,
+        endBalance = INIT_DOLLAR
     )
     private var calcModel: InterestCalcModel = InterestCalcModel(dataBase)
-    private val prefix = "$"
-    private val suffix = "%"
+    val prefix = PREFIX
+    val suffix = SUFFIX
 
     fun calcEndBalance() {
         dataBase.principle = principle.value.toDouble()
@@ -29,41 +42,19 @@ class MainCalcViewModel : StateMachine() {
         endBalance.value = calcModel.calcEndBalance().toString()
     }
 
-    fun principleValueHandler(value: String) {
+    fun onPrincipleChange(value: String) {
         principle.value = value
     }
 
-    fun rateValueHandler(value: String) {
+    fun onRateChange(value: String) {
         rate.value = value
     }
 
-    fun compoundPeriodsValueHandler(value: String) {
+    fun onCompoundChange(value: String) {
         compoundPeriods.value = value
     }
 
-    fun yearsValueHandler(value: String) {
+    fun onYearsChange(value: String) {
         years.value = value
     }
-
-    fun clearTextField(field: String) {
-        when (field) {
-            "Principle" -> principle.value = ""
-            "Rate" -> rate.value = ""
-            "Years" -> years.value = ""
-            "Compounding Periods" -> compoundPeriods.value = ""
-            "Contributing Amount" -> contributingAmount.value = ""
-        }
-    }
-}
-
-open class StateMachine {
-    val principle: MutableState<String> = mutableStateOf("0.00")
-    val rate: MutableState<String> = mutableStateOf("0")
-    val compoundPeriods: MutableState<String> = mutableStateOf("0")
-    val years: MutableState<String> = mutableStateOf("0")
-    val contributingAmount: MutableState<String> = mutableStateOf("0.00")
-    val endBalance: MutableState<String> = mutableStateOf("0.00")
-    val counter: MutableState<Int> = mutableIntStateOf(0)
-    val isFocused: MutableState<Boolean> = mutableStateOf(false)
-    val unfocusedTextColor: MutableState<Color> = mutableStateOf(Color.LightGray)
 }
