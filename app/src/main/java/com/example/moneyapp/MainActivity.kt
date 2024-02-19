@@ -59,6 +59,8 @@ fun MainCalculator(
 
     val imeActionNext = ImeAction.Next
     val imeActionDone = ImeAction.Done
+    val prefix = "$"
+    val suffix = "%"
 
     Column(
         modifier = Modifier
@@ -71,7 +73,7 @@ fun MainCalculator(
             imeActionHolder = imeActionNext,
             updatedValue = viewModel.principle,
             onValueChange = viewModel::onPrincipleChange,
-            prefix = viewModel.prefix,
+            prefix = prefix,
             viewModel = principleViewModel
         )
         HintTextField(
@@ -79,7 +81,7 @@ fun MainCalculator(
             imeActionHolder = imeActionNext,
             updatedValue = viewModel.rate,
             onValueChange = viewModel::onRateChange,
-            suffix = viewModel.suffix,
+            suffix = suffix,
             viewModel = rateViewModel
         )
         HintTextField(
@@ -106,7 +108,7 @@ fun MainCalculator(
             text = viewModel.endBalance.value
         )
         Button(
-            onClick = { viewModel.calcEndBalance() },
+            onClick = { viewModel.calculateEndBalance() },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = "Calculate", fontSize = 24.sp)
