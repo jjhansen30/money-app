@@ -8,7 +8,7 @@ class MainCalcViewModel {
     private var interestCalcModel = CompoundInterestCalcModel(interestCalculator)
 
     val principle: MutableState<String> = mutableStateOf(STR_INIT_DOLLAR)
-    val rate: MutableState<String> = mutableStateOf(STR_ZERO)
+    val rate: MutableState<String> = mutableStateOf("$STR_ZERO%")
     val compoundPeriods: MutableState<String> = mutableStateOf(STR_ZERO)
     val years: MutableState<String> = mutableStateOf(STR_ZERO)
     val contributingAmount: MutableState<String> = mutableStateOf(STR_INIT_DOLLAR) // TODO()

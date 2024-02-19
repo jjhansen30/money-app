@@ -21,24 +21,18 @@ import androidx.compose.ui.unit.sp
 import com.example.moneyapp.ui.common.view.HintTextField
 import com.example.moneyapp.ui.common.viewmodel.HintTextFieldViewModel
 
-lateinit var viewModel: MainCalcViewModel
-lateinit var principleViewModel: HintTextFieldViewModel
-lateinit var rateViewModel: HintTextFieldViewModel
-lateinit var yearsViewModel: HintTextFieldViewModel
-lateinit var compoundViewModel: HintTextFieldViewModel
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = MainCalcViewModel()
-        principleViewModel = HintTextFieldViewModel()
-        rateViewModel = HintTextFieldViewModel()
-        yearsViewModel = HintTextFieldViewModel()
-        compoundViewModel = HintTextFieldViewModel()
+        val viewModel = MainCalcViewModel()
+        val principleViewModel = HintTextFieldViewModel()
+        val rateViewModel = HintTextFieldViewModel()
+        val yearsViewModel = HintTextFieldViewModel()
+        val compoundViewModel = HintTextFieldViewModel()
 
         setContent {
             MainCalculator(
-                viewModel = viewModel,
+                mainViewModel = viewModel,
                 principleViewModel = principleViewModel,
                 rateViewModel = rateViewModel,
                 yearsViewModel = yearsViewModel,
@@ -50,7 +44,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainCalculator(
-    viewModel: MainCalcViewModel,
+    mainViewModel: MainCalcViewModel,
     principleViewModel: HintTextFieldViewModel,
     rateViewModel: HintTextFieldViewModel,
     yearsViewModel: HintTextFieldViewModel,
@@ -59,8 +53,6 @@ fun MainCalculator(
 
     val imeActionNext = ImeAction.Next
     val imeActionDone = ImeAction.Done
-    val prefix = "$"
-    val suffix = "%"
 
     Column(
         modifier = Modifier
@@ -71,33 +63,32 @@ fun MainCalculator(
         HintTextField(
             label = stringResource(R.string.principle),
             imeActionHolder = imeActionNext,
-            updatedValue = viewModel.principle,
-            onValueChange = viewModel::onPrincipleChange,
-            prefix = prefix,
-            viewModel = principleViewModel
+            updatedValue = mainViewModel.principle,
+            onValueChange = mainViewModel::onPrincipleChange,
+            prefix = stringResource(R.string.dollar_sign),
+            hintViewModel = principleViewModel
         )
         HintTextField(
             label = stringResource(R.string.rate),
             imeActionHolder = imeActionNext,
-            updatedValue = viewModel.rate,
-            onValueChange = viewModel::onRateChange,
-            suffix = suffix,
-            viewModel = rateViewModel
+            updatedValue = mainViewModel.rate,
+            onValueChange = mainViewModel::onRateChange,
+            hintViewModel = rateViewModel
         )
         HintTextField(
             label = stringResource(R.string.years),
             imeActionHolder = imeActionNext,
-            updatedValue = viewModel.years,
-            onValueChange = viewModel::onYearsChange,
-            viewModel = yearsViewModel
+            updatedValue = mainViewModel.years,
+            onValueChange = mainViewModel::onYearsChange,
+            hintViewModel = yearsViewModel
         )
 
         HintTextField(
             label = stringResource(R.string.compound_periods),
             imeActionHolder = imeActionDone,
-            updatedValue = viewModel.compoundPeriods,
-            onValueChange = viewModel::onCompoundChange,
-            viewModel = compoundViewModel
+            updatedValue = mainViewModel.compoundPeriods,
+            onValueChange = mainViewModel::onCompoundChange,
+            hintViewModel = compoundViewModel
         )
         Text(
             modifier = Modifier
@@ -105,10 +96,10 @@ fun MainCalculator(
                 .padding(16.dp),
             fontSize = 24.sp,
             textAlign = TextAlign.Center,
-            text = viewModel.endBalance.value
+            text = mainViewModel.endBalance.value
         )
         Button(
-            onClick = { viewModel.calculateEndBalance() },
+            onClick = { mainViewModel.calculateEndBalance() },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = "Calculate", fontSize = 24.sp)
