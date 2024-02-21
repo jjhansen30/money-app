@@ -24,10 +24,6 @@ I didn't know how files and classes were instantiated. In essence, whenever I ty
 field and then moved to the next, the text would change from black to light gray. Solution for
 me was to call Hint separately and create multiple instances for each TextField I made.
 
-## New Learning Goal
-
-Ask if there's a way to handle Hint better. It feels weird with the way I'm handling it.
-
 * Learning dependency injection was fun. I got to learn about the application lifecycle and how Hilt/Dagger utilizes that to manage dependencies. Very big learning curve but was rewarded with a working app. I did have a little help from my co-workers when I couldn't make things work but I made sure to understand why they suggested what they suggested and not just copy code.
 
 # Cloning the repo
