@@ -18,21 +18,26 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.activity.viewModels
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.moneyapp.ui.common.view.HintTextField
 import com.example.moneyapp.ui.common.viewmodel.HintTextFieldViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val viewModel: MainCalcViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewModel = MainCalcViewModel()
         val principleViewModel = HintTextFieldViewModel()
         val rateViewModel = HintTextFieldViewModel()
         val yearsViewModel = HintTextFieldViewModel()
         val compoundViewModel = HintTextFieldViewModel()
 
         setContent {
+
             MainCalculator(
-                mainViewModel = viewModel,
                 principleViewModel = principleViewModel,
                 rateViewModel = rateViewModel,
                 yearsViewModel = yearsViewModel,
@@ -44,7 +49,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainCalculator(
-    mainViewModel: MainCalcViewModel,
+    mainViewModel: MainCalcViewModel = viewModel(),
     principleViewModel: HintTextFieldViewModel,
     rateViewModel: HintTextFieldViewModel,
     yearsViewModel: HintTextFieldViewModel,
