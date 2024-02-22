@@ -37,7 +37,12 @@ fun HintTextField(
 
     TextField(
         prefix = { Text(text = prefix, fontSize = fontSize) },
-        label = { Text(text = label, fontSize = fontSize) },
+        label = { Text(
+            text = label,
+            fontSize = fontSize,
+            lineHeight = 28.sp,
+            maxLines = 2
+        )},
         textStyle = TextStyle.Default.copy(
             fontSize = fontSize
         ),
