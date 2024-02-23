@@ -31,22 +31,25 @@ fun HintTextField(
     updatedValue: MutableState<String>,
     onValueChange: (String) -> Unit,
     prefix: String = "",
+    suffix: String = "",
     fontSize: TextUnit = 24.sp,
     padding: Dp = 12.dp
 ) {
 
     TextField(
         prefix = { Text(text = prefix, fontSize = fontSize) },
-        label = { Text(
-            text = label,
-            fontSize = fontSize,
-            lineHeight = 28.sp,
-            maxLines = 2
-        )},
+        label = {
+            Text(
+                text = label,
+                fontSize = fontSize,
+                lineHeight = 28.sp,
+                maxLines = 2
+            )
+        },
         textStyle = TextStyle.Default.copy(
             fontSize = fontSize
         ),
-        value = updatedValue.value,
+        value = updatedValue.value + suffix,
         onValueChange = onValueChange,
         modifier = Modifier
             .padding(padding)
@@ -56,7 +59,7 @@ fun HintTextField(
             focusedContainerColor = Color.White,
             unfocusedContainerColor = Color.White,
             unfocusedTextColor = hintViewModel.unFocusedTextColor.value,
-            ),
+        ),
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Decimal,
             imeAction = imeActionHolder

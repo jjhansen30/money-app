@@ -11,6 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -55,6 +58,7 @@ fun MainCalculator(
 
     val imeActionNext = ImeAction.Next
     val imeActionDone = ImeAction.Done
+    val percent by remember { mutableStateOf("%") }
 
     Column(
         modifier = Modifier
@@ -75,7 +79,8 @@ fun MainCalculator(
             imeActionHolder = imeActionNext,
             updatedValue = mainViewModel.rate,
             onValueChange = mainViewModel::onRateChange,
-            hintViewModel = rateViewModel
+            hintViewModel = rateViewModel,
+            suffix = stringResource(R.string.percent_sign)
         )
         HintTextField(
             label = stringResource(R.string.years),
